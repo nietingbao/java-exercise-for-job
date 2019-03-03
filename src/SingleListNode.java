@@ -99,6 +99,9 @@ public class SingleListNode {
         System.out.print(p.data);
     }
 
+
+
+    
     public static void main(String[] args) {
         SingleListNode listNode = new SingleListNode();
         listNode.addNode('A');
