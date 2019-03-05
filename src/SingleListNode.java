@@ -10,7 +10,7 @@ public class SingleListNode {
         private Object data;
         private Node next;
 
-        Node(Object obj) {
+        public Node(Object obj) {
             this.data = obj;
         }
     }
@@ -84,6 +84,11 @@ public class SingleListNode {
         return false;
     }
 
+    //检测是否为空
+    boolean isEmpty() {
+        return (head == null);
+    }
+
     //显示节点信息
     public void display() {
         if (size == 0) {
@@ -101,7 +106,7 @@ public class SingleListNode {
 
 
 
-    
+
     public static void main(String[] args) {
         SingleListNode listNode = new SingleListNode();
         listNode.addNode('A');
