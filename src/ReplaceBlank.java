@@ -1,36 +1,34 @@
 public class ReplaceBlank {
-    static String replace(char[] a, int length) {
-        if (a == null || length <= 0) {
-            return null;
-        }
-        int newLength;
+    static public String replaceSpace(StringBuffer str) {
+        if (str == null) return null;
         int numOfBlank = 0;
-        for (char c:a
-             ) {
-            if(c == ' ')
-                numOfBlank ++;
+        for (int i = 0; i < str.length(); ++i) {
+            if (str.charAt(i) == ' ') {
+                numOfBlank++;
+            }
         }
-        newLength = length + 2 * numOfBlank;
-        int indexOfOrigin = length - 1;
+        int newLength = str.length() + 2 * numOfBlank;
+        int indexOfOrigin = str.length() - 1;
         int indexOfNew = newLength - 1;
-        char[] b = new char[newLength];
-        for(;indexOfOrigin >= 0; indexOfOrigin--) {
-            if (a[indexOfOrigin] == ' ') {
-                b[indexOfNew--] = '0';
-                b[indexOfNew--] = '2';
-                b[indexOfNew--] = '%';
+        str.setLength(newLength);
+        for(;indexOfOrigin >= 0 && indexOfOrigin < newLength; --indexOfOrigin) {
+            if (str.charAt(indexOfOrigin) == ' ') {
+                str.setCharAt(indexOfNew--, '0');
+                str.setCharAt(indexOfNew--, '2');
+                str.setCharAt(indexOfNew--, '%');
             }
             else {
-                b[indexOfNew--] = a[indexOfOrigin];
+                str.setCharAt(indexOfNew--,str.charAt(indexOfOrigin));
             }
         }
         //将字符数组转换为字符串，直接用构造方法
-        return new String(b);
-     }
-
+        return str.toString();
+    }
     public static void main(String[] args) {
-        String a = "wewew";
-        System.out.println(replace(a.toCharArray(), a.length()));
+        String a = "w ";
+        StringBuffer b = new StringBuffer(a);
+        System.out.println(replaceSpace(b));
+
 
     }
 }
