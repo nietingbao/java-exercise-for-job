@@ -1,33 +1,26 @@
 public class MinNumInRotate {
     public int minNumberInRotateArray(int [] array) {
-        int index1 = 0;
-        int index2 = array.length - 1;
-        int mid = 0;
-        while (index2 >= index1) {
-            if (index2 - index1 == 1) {
-                mid = index2;
-                break;
-            }
+        return search(array, 0, array.length - 1);
+    }
 
-            if (array[index1] == array[index2]) {
-                mid = (index1 + index2)/2;
-                if (array[mid] == array[index2]) {
-                    return minInOrder(array, index1, index2);
-                }
-                else if (array[mid] > array[index2]) {
-                    index1 = mid;
-                }
-                else index2 = mid;
-            }
-            else {
-                mid = (index1 + index2)/2;
-                if (array[mid] > array[index2]) {
-                    index1 = mid;
-                }
-                else index2 = mid;
-            }
+    private int search(int[] array, int low, int high) {
+        if (high - low == 1)
+            return high;
+        int mid;
+        if (array[low] == array[high]) {
+           mid = (low + high)/2;
+           if (array[mid] == array[low])
+               return minInOrder(array, low, high);
+           else if (array[mid] > array[low])
+               return search(array, mid, high);
+           else return search(array, low, mid);
         }
-        return array[mid];
+        else {
+            mid = (low + high)/2;
+            if (array[mid] > array[low])
+                return search(array, mid, high);
+            else return search(array, low, mid);
+        }
     }
 
     /**
