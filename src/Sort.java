@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.RandomAccess;
 
@@ -44,24 +45,48 @@ public class Sort {
         array[index2] = temp;
     }
 
+    public void mergeSort(int[] a, int start, int end) {
+        if (start < end) {
+            int mid = (start+end)/2;
+            mergeSort(a, start, mid);
+            mergeSort(a,mid+1, end);
+            merge(a, start, mid, end);
+        }
+    }
+
+    private void merge(int[] a, int start,int mid, int end) {
+        int[] tmp = new int[a.length];
+        int p1 = start;
+        int p2 = mid+1;
+        int k = start;
+        while (p1 <= mid&&p2 <= end) {
+            if (a[p1] < a[p2])
+                tmp[k++] = a[p1++];
+            else tmp[k++] = a[p2++];
+        }
+        while (p1<=mid)
+            tmp[k++] = a[p1++];
+
+        while (p2<=end)
+            tmp[k++] = a[p2++];
+
+        for (int i = start; i <=end; i++) {
+            a[i] = tmp[i];
+        }
+        //a = Arrays.copyOfRange(tmp,0,tmp.length);
+
+
+    }
     public static void main(String[] args) {
         Sort sort = new Sort();
         int[] a = {1,5,8,9,6,4,3,4,7,1};
         int[] c = a;//这里直接是同一个引用，因此当a变的时候，c也会变
-        sort.bubbleSort(a);
+        sort.mergeSort(a,0,a.length-1);
 
         for (int b:a
              ) {
             System.out.print(b);
         }
-        for (int b:c
-        ) {
-            System.out.print(b);
-        }
-        sort.quickSort(c, 0 ,c.length - 1);
-        for (int b:c
-        ) {
-            System.out.print(b);
-        }
+
     }
 }
