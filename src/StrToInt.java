@@ -28,7 +28,7 @@ public class StrToInt {
                 i++;
             num = num * 10 + chars[i];
             i++;
-        } 
+        }
         if (minus==1)
             return 0-num;
         else return num;
